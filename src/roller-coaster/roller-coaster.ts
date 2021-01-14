@@ -1,6 +1,8 @@
 interface Cash {
-  ammount: number
-  next: number
+  [index: string]: {
+    amount: number
+    next: number
+  }
 }
 
 export function rollerCoaster(
@@ -9,7 +11,7 @@ export function rollerCoaster(
   numberOfPeople: number,
   groups: number[]
 ): number {
-  const cash: any = {}
+  const cash: Cash = {}
   let resetIndex = numberOfPeople
   let [rides, sum, nextIndex, rest] = [0, 0, 0, numberOfPlaces]
 
@@ -25,7 +27,7 @@ export function rollerCoaster(
 
     const originalIndex = nextIndex
     while (nextIndex < numberOfPeople) {
-      const nextGroup = groups[nextIndex]
+      const nextGroup = Number(groups[nextIndex])
 
       if (nextGroup > rest) {
         break
@@ -52,7 +54,10 @@ export function rollerCoaster(
       nextIndex = 0
     }
 
-    cash[originalIndex] = { amount: groups[originalIndex], next: nextIndex }
+    cash[originalIndex] = {
+      amount: Number(groups[originalIndex]),
+      next: nextIndex,
+    }
   }
 
   return sum
