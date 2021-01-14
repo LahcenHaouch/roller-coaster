@@ -16,37 +16,28 @@ export function rollerCoaster(
   let [rides, sum, nextIndex, rest] = [0, 0, 0, numberOfPlaces]
 
   while (rides < numberOfTime) {
-    if (cash[nextIndex]) {
+    const originalIndex = nextIndex
+    if (nextIndex in cash) {
       const { amount, next } = cash[nextIndex]
       sum += amount
       nextIndex = next
       rides++
       // eslint-disable-next-line no-continue
       continue
-    }
+    } else {
+      while (nextIndex < numberOfPeople && Number(groups[nextIndex]) <= rest) {
+        rest -= Number(groups[nextIndex])
+        nextIndex = nextIndex === numberOfPeople - 1 ? 0 : nextIndex + 1
 
-    const originalIndex = nextIndex
-    while (nextIndex < numberOfPeople) {
-      const nextGroup = Number(groups[nextIndex])
-
-      if (nextGroup > rest) {
-        break
-      }
-
-      rest -= nextGroup
-      nextIndex += 1
-
-      if (nextIndex === resetIndex) {
-        break
-      }
-
-      if (nextIndex === numberOfPeople) {
-        nextIndex = 0
+        if (nextIndex === resetIndex) {
+          break
+        }
       }
     }
 
     rides += 1
-    sum += numberOfPlaces - rest
+    const amountToAdd = numberOfPlaces - rest
+    sum += amountToAdd
     rest = numberOfPlaces
     resetIndex = nextIndex
 
@@ -55,7 +46,7 @@ export function rollerCoaster(
     }
 
     cash[originalIndex] = {
-      amount: Number(groups[originalIndex]),
+      amount: amountToAdd,
       next: nextIndex,
     }
   }

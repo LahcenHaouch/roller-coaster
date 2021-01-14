@@ -14,14 +14,16 @@ export const readFileAndPrintSum = async (filePath: string) => {
       ' '
     )
 
-    const [numberOfPeople, ...groups] = numberOfPeopleAndGroups.split('\n')
+    const [numberOfPeople, ...rest] = numberOfPeopleAndGroups.split('\n')
+
+    const groups = rest.map(element => Number(element))
 
     console.log(
       rollerCoaster(
         Number(numberOfPlaces),
         Number(numberOfTime),
         Number(numberOfPeople),
-        (groups as unknown) as number[]
+        groups
       )
     )
   } catch (error) {

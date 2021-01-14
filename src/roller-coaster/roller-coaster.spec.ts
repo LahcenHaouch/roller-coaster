@@ -12,10 +12,4 @@ describe('roller-coaster', () => {
 
     expect(result).toEqual(14)
   })
-
-  test('roller-coaster should return 100', () => {
-    const result = rollerCoaster(10, 100, 1, [1])
-
-    expect(result).toEqual(100)
-  })
 })
