@@ -25,8 +25,8 @@ export function rollerCoaster(
       // eslint-disable-next-line no-continue
       continue
     } else {
-      while (nextIndex < numberOfPeople && Number(groups[nextIndex]) <= rest) {
-        rest -= Number(groups[nextIndex])
+      while (nextIndex < numberOfPeople && groups[nextIndex] <= rest) {
+        rest -= groups[nextIndex]
         nextIndex = nextIndex === numberOfPeople - 1 ? 0 : nextIndex + 1
 
         if (nextIndex === resetIndex) {
