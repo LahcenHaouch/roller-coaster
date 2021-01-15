@@ -1,7 +1,7 @@
 import { promises as fsPromises } from 'fs'
 import path from 'path'
 
-import { rollerCoaster } from './roller-coaster/roller-coaster'
+import { rollerCoaster } from './roller-coaster'
 
 export const readFileAndPrintSum = async (filePath: string) => {
   try {
