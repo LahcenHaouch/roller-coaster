@@ -1,4 +1,4 @@
-interface Cash {
+interface Cache {
   [index: string]: {
     amount: number
     next: number
@@ -11,14 +11,14 @@ export function rollerCoaster(
   numberOfPeople: number,
   groups: number[]
 ): number {
-  const cash: Cash = {}
+  const cache: Cache = {}
   let resetIndex = numberOfPeople
   let [rides, sum, nextIndex, rest] = [0, 0, 0, numberOfPlaces]
 
   while (rides < numberOfTime) {
     const originalIndex = nextIndex
-    if (nextIndex in cash) {
-      const { amount, next } = cash[nextIndex]
+    if (nextIndex in cache) {
+      const { amount, next } = cache[nextIndex]
       sum += amount
       nextIndex = next
       rides++
@@ -45,7 +45,7 @@ export function rollerCoaster(
       nextIndex = 0
     }
 
-    cash[originalIndex] = {
+    cache[originalIndex] = {
       amount: amountToAdd,
       next: nextIndex,
     }
